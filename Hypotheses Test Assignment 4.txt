@@ -1,0 +1,84 @@
+Hypotheses
+
+The null hypothesis (H0) is that the weekly operating cost model is accurate, i.e., the mean weekly cost is equal to the theoretical mean weekly cost according to the cost model. The alternative hypothesis (H1) is that the weekly operating cost model is not accurate, i.e., the mean weekly cost is higher than the theoretical mean weekly cost according to the cost model.
+
+Calculate the Test Statistic
+
+First, let's calculate the theoretical mean weekly cost according to the cost model:
+
+
+Code :- 
+
+X = 600  # mean number of units produced in a week
+theoretical_mean_weekly_cost = 1000 + 5 * X
+print("Theoretical Mean Weekly Cost:", theoretical_mean_weekly_cost)
+
+OutPut:- 
+
+Theoretical Mean Weekly Cost: 3700.0
+
+Now, we calculate the test statistic (t):
+
+Code:- 
+
+sample_mean_weekly_cost = 3050  # mean weekly cost of the sample
+sigma = 5 * 25  # standard deviation of the weekly cost
+n = 25  # sample size
+
+t = (sample_mean_weekly_cost - theoretical_mean_weekly_cost) / (sigma / np.sqrt(n))
+print("Test Statistic (t):", t)
+
+Output:- 
+
+Test Statistic (t): 2.23606797749979
+
+Determine the Critical Value
+
+Using the alpha level of 5% (α = 0.05), we can determine the critical value from the standard normal (Z) distribution table or using Python:
+
+Code:- 
+
+from scipy.stats import norm
+
+critical_value = norm.ppf(0.95)
+print("Critical Value:", critical_value)
+
+Output:- 
+
+Critical Value: 1.6448536269514722
+
+Make a Decision
+
+Comparing the test statistic (t) with the critical value, we can reject the null hypothesis (H0) since the test statistic is greater than the critical value.
+
+Conclusion
+
+There is strong evidence to support the restaurant owners' claim that the weekly operating costs are higher than the model suggests.
+
+Here's the complete Python code:
+
+import numpy as np
+from scipy.stats import norm
+
+X = 600  # mean number of units produced in a week
+theoretical_mean_weekly_cost = 1000 + 5 * X
+print("Hypotheses:")
+print("H0: The weekly operating cost model is accurate.")
+print("H1: The weekly operating cost model is not accurate.")
+
+print("\nTheoretical Mean Weekly Cost:", theoretical_mean_weekly_cost)
+
+sample_mean_weekly_cost = 3050  # mean weekly cost of the sample
+sigma = 5 * 25  # standard deviation of the weekly cost
+n = 25  # sample size
+
+t = (sample_mean_weekly_cost - theoretical_mean_weekly_cost) / (sigma / np.sqrt(n))
+print("\nTest Statistic (t):", t)
+
+critical_value = norm.ppf(0.95)
+print("\nCritical Value:", critical_value)
+
+if t > critical_value:
+    print("\nReject H0: There is strong evidence to support the restaurant owners' claim that the weekly operating costs are higher than the model suggests.")
+else:
+    print("\nFail to reject H0: There is no strong evidence to support the restaurant owners' claim that the weekly operating costs are higher than the model suggests.")

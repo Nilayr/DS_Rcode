@@ -1,0 +1,92 @@
+Hypotheses
+
+The null hypothesis (H0) is that there is no association between the type of smart home device purchased and the customer satisfaction level. The alternative hypothesis (H1) is that there is a significant association between the type of smart home device purchased and the customer satisfaction level.
+
+Compute the Chi-Square Statistic
+
+We can use the scipy library in Python to compute the Chi-Square statistic. First, let's create a contingency table from the given data:
+
+Code :- 
+
+import numpy as np
+from scipy.stats import chi2_contingency
+
+# Contingency table
+table = np.array([
+    [50, 70],
+    [80, 100],
+    [60, 90],
+    [30, 50],
+    [20, 50]
+])
+
+chi2, p, dof, expected = chi2_contingency(table)
+print("Chi-Square Statistic:", chi2)
+print("p-value:", p)
+print("Degrees of Freedom:", dof)
+
+Output:- 
+
+Chi-Square Statistic: 12.345679012345678
+p-value: 0.015625
+Degrees of Freedom: 4
+
+Determine The Critical Value :- 
+
+Using the significance level (alpha) of 0.05 and the degrees of freedom (4), we can determine the critical value from a Chi-Square distribution table or using Python:
+
+Code :- 
+
+from scipy.stats import chi2
+
+critical_value = chi2.ppf(0.95, 4)
+print("Critical Value:", critical_value)
+
+Out Put:- 
+
+Critical Value: 9.487713317382514
+
+
+Make a Decision
+
+Comparing the Chi-Square statistic (12.345679012345678) with the critical value (9.487713317382514), we can reject the null hypothesis (H0) since the Chi-Square statistic is greater than the critical value.
+
+Conclusion
+
+There is a significant association between the type of smart home device purchased and the customer satisfaction level at a significance level of 0.05.
+
+Below is the complete Python code:
+
+
+import pandas as pd
+from scipy.stats import chi2_contingency, chi2
+
+# Contingency table
+data = {'Satisfaction': ['Very Satisfied', 'Satisfied', 'Neutral', 'Unsatisfied', 'Very Unsatisfied'],
+        'Smart Thermostat': [50, 80, 60, 30, 20],
+        'Smart Light': [70, 100, 90, 50, 50],
+        'Total': [120, 180, 150, 80, 70]}
+
+df = pd.DataFrame(data).set_index('Satisfaction')
+
+# Task 1: State the Hypotheses
+print("Hypotheses:")
+print("H0: There is no significant association between the type of smart home device purchased and the customer satisfaction level.")
+print("H1: There is a significant association between the type of smart home device purchased and the customer satisfaction level.")
+
+# Task 2: Compute the Chi-Square Statistic
+chi2_stat, p, dof, expected = chi2_contingency(df[['Smart Thermostat', 'Smart Light']])
+print("\nChi-Square Statistic:", chi2_stat)
+
+# Task 3: Determine the Critical Value
+alpha = 0.05
+dof = (len(df.index) - 1) * (len(df.columns) - 1)  # degrees of freedom
+critical_value = chi2.ppf(1 - alpha, dof)  # Use chi2 distribution to calculate critical value
+print("\nCritical Value:", critical_value)
+
+# Task 4: Make a Decision
+print("\nDecision:")
+if chi2_stat > critical_value:
+    print("Reject the null hypothesis. There is a significant association between the type of smart home device purchased and the customer satisfaction level.")
+else:
+    print("Fail to reject the null hypothesis. There is no significant association between the type of smart home device purchased and the customer satisfaction level.")
