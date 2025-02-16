@@ -1,0 +1,192 @@
+Interview Questions :- 
+
+A) What are the key hyperparameters in KNN?
+
+Ans :- In the K-Nearest Neighbors (KNN) algorithm, there are several key hyperparameters that can significantly influence the model's performance. Here are the most important ones:
+
+1. n_neighbors (K)
+
+Description: The number of nearest neighbors to consider when making a prediction.
+
+
+Impact:
+
+A) A smaller value of K makes the model more sensitive to noise (overfitting).
+
+B) A larger value of K smoothens the decision boundary but might miss finer patterns in the data (underfitting).
+
+C) Typical Range: 
+                Usually between 1 and 20, though it can be larger depending on the dataset.
+
+2. metric
+
+A) Description: The distance metric used to calculate the distance between points.
+
+ B) Common options are:
+
+a) euclidean': Default. The straight-line distance between two points.
+
+b) manhattan': Sum of absolute differences along each dimension.
+
+c) minkowski': Generalization of both Euclidean and Manhattan distances. It allows you to specify the order of the distance.
+
+d) cosine': Often used for text data, measures the angle between vectors.
+
+e) hamming': Used for categorical data.
+
+# Impact:
+        Different distance metrics can yield different decision boundaries and influence model performance.
+
+3. weights
+
+A) Description: The weight function used in prediction.
+
+a) uniform': All neighbors have equal weight.
+
+b) distance': Neighbors closer to the point of interest are given more weight.
+
+c) Callable: A user-defined function that returns a weight for each neighbor.
+
+Impact: 
+       Using 'distance' can give more importance to closer neighbors, which is useful if you believe nearby data points are more influential.
+
+4. algorithm
+
+A) Description: The algorithm used to compute the nearest neighbors.
+
+a) auto': The algorithm is selected based on the input data (this is the default).
+
+b) ball_tree': Builds a tree for efficient nearest-neighbor search.
+
+c) kd_tree': Another tree-based method to speed up nearest-neighbor search.
+
+d) brute': A brute-force approach that calculates the distance to all points (slower for large datasets).
+
+Impact: 
+      The choice of algorithm can affect the training and prediction time, especially on large datasets.
+
+5. leaf_size
+
+Description: The leaf size parameter is used by the BallTree or KDTree algorithm to partition the data. It controls the size of the leaf nodes in the tree structure.
+
+Impact: 
+      Larger leaf sizes can reduce memory usage but may slow down the query time. Smaller leaf sizes tend to make search more efficient but use more memory.
+
+6. p (for Minkowski metric)
+
+Description: 
+
+a) The power parameter for the Minkowski distance.
+
+b) When p = 1, it corresponds to the Manhattan distance.
+
+c) When p = 2, it corresponds to the Euclidean distance.
+
+d) Other values of p define the general Minkowski distance.
+
+Impact: 
+       This controls how much emphasis is placed on each dimension when calculating the distance between points.
+
+7. n_jobs
+
+Description: 
+The number of CPU cores to use when running the algorithm.
+-1: 
+Use all available cores.
+None: Uses a single core.
+
+Impact: 
+      Can help with parallelization for larger datasets, improving performance during training.
+
+8. metric_params
+
+Description: Additional parameters that can be passed to the distance metric function, depending on the chosen metric.
+
+Impact: 
+      Specific to the distance metric, these can allow customization of how distances are calculated.
+
+
+2. What distance metrics can be used in KNN?
+
+Ans :- 
+
+In the K-Nearest Neighbors (KNN) algorithm, the distance metric plays a critical role in determining how distances between data points are calculated. The choice of distance metric can significantly affect the performance of the model. Below are the most commonly used distance metrics in KNN:
+
+1. Euclidean Distance
+
+Formula:- 
+
+         d(x,y)= 
+
+Description: 
+
+This is the most commonly used distance metric in KNN, and it calculates the straight-line (or "as-the-crow-flies") distance between two points in the feature space. It is best suited for continuous data with numeric features.
+
+When to use: It works well when the features are continuous and the relationship between features is linear.
+
+2. Manhattan Distance (L1 norm)
+
+Description: This metric calculates the sum of the absolute differences between corresponding elements of two points. It’s often referred to as the "taxicab" or "city block" distance because it mimics the way a taxi would navigate through city streets (by following grid-like paths).
+
+When to use: Useful when you have grid-like or non-Euclidean geometry data, such as in certain classification problems involving categorical features.
+
+3. Minkowski Distance 
+
+Description: Minkowski distance is a generalization of both Euclidean and Manhattan distances. The parameter p defines the type of distance:
+
+a) When p = 1, it becomes Manhattan Distance.
+
+b) When p = 2, it becomes Euclidean Distance.
+
+c) Other values of p define different kinds of distance metrics.
+
+When to use: This is a flexible metric that allows you to tune the parameter p depending on the data and the desired characteristics.
+
+4. Chebyshev Distance:- 
+
+Description: Chebyshev distance measures the greatest absolute difference between the coordinates of two points. It’s useful when you care more about the largest difference across dimensions rather than the sum of differences.
+
+When to use: It is often used in chessboard-like grid environments (e.g., for game or pathfinding problems).
+
+5. Cosine Similarity:- 
+
+Description: This metric measures the cosine of the angle between two vectors in a multi-dimensional space. It is typically used for text data (e.g., with TF-IDF vectors or word embeddings), where the magnitude of the vectors doesn’t matter, only the direction.
+
+When to use: It is commonly used for text classification problems, where documents are represented as vectors of word frequencies or embeddings.
+
+6. Hamming Distance:- 
+
+Description: Hamming distance is used to measure the number of positions at which the corresponding elements are different. It is typically used for categorical variables, especially binary data.
+
+When to use: Commonly used in problems with categorical data or strings of equal length (e.g., DNA sequences, binary features).
+
+7. Jaccard Distance :- 
+
+Description: Jaccard distance measures dissimilarity between two sets by calculating the ratio of the difference between the intersection and union of two sets. It is commonly used in binary or set data.
+
+When to use: Useful for problems involving sets (e.g., finding similarity between two groups of items).
+
+8. Mahalanobis Distance:- 
+
+Description: This is a distance metric that takes into account the correlations of the data set and is scaled by the covariance matrix of the dataset. It is used when the data has varying variances across features.
+
+When to use: Suitable for cases where the features have different variances or are correlated.
+
+9. Bray-Curtis Distance
+
+Description: This distance metric is often used for ecological data or when comparing two sets of measurements. It calculates the dissimilarity based on the relative abundances of features.
+
+When to use: Used in ecology or in problems where you need to compare proportions or counts of features.
+
+Choosing the Right Metric:
+
+a) Euclidean and Manhattan distances are generally used in typical machine learning tasks with continuous data.
+
+b) Cosine similarity is typically used in natural language processing (NLP) and text mining.
+
+c) Hamming distance is best for binary or categorical data (e.g., strings or sequences).
+
+d) Minkowski distance allows flexibility by adjusting the power parameter.
+
+e) Mahalnobis distance is useful when data points have different variances or are correlated.
+
