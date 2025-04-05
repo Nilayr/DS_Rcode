@@ -104,7 +104,7 @@ Can predictions support policymaking or awareness campaigns?
 🤝 Let's Connect
 Are you working on climate, data science, or sustainability projects? I’d love to collaborate or exchange ideas!
 
-📫 Email: nilay.rathod11@gmail.com
+📫 Email: nilayrathod11@gmail.com
 🔗 LinkedIn: 🌍 Climate Change Modeling using Machine Learning
 Climate change is one of the most pressing global challenges of our time. Through this project, we leverage historical data and machine learning to analyze and model environmental trends with the goal of understanding and predicting future climate patterns. The project is based on NASA's open climate dataset, offering rich insights into atmospheric conditions over the past several decades.
 
